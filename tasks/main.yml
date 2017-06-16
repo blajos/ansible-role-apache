@@ -40,6 +40,15 @@
     group: root
     mode: 0755
 
+- name: Update port list
+  template:
+    src: ports.conf.j2
+    dest: "{{ apache_path }}/ports.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apache
+
 - name: Update vhost
   template:
     src: vhost.conf.j2
