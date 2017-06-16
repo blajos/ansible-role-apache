@@ -25,7 +25,11 @@
 
 - name: Copy SSL key
   tags: ["ssl"]
-  copy: src={{ ssl_cert_local_directory }}/{{ ssl_key }} dest={{ ssl_cert_directory }}
+  copy: 
+    src: "{{ ssl_cert_local_directory }}/{{ ssl_key }}"
+    dest: "{{ ssl_cert_directory }}"
+    owner: root
+    mode: '0600'
   notify: restart apache
 
 - name: Create apache log directory
