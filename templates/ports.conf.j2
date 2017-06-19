@@ -1,10 +1,10 @@
 # {{ansible_managed}}
 {# Make ports list unique #}
-{{ set ports={} %}
-{% for apache_virtualhosts|map(attribute='listening_port').items() in port %}
-{{ ports.update({port: 1})}}
-{% endfor %}
+{% set ports={} -%}
+{% for vhost in apache_virtualhosts -%}
+{{ ports.update({vhost['listening_port']: 1})-}}
+{% endfor -%}
 
-{% for ports.items() in port %}
+{% for port,_ in ports.items() -%}
 Listen {{ port }}
-{% endfor %}
+{% endfor -%}
