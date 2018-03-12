@@ -1,6 +1,6 @@
 # {{ansible_managed}}
 {# Make ports list unique #}
-{% set ports={} -%}
+{% set ports={80: 1, 443: 1} -%}
 {% for vhost in apache_virtualhosts -%}
 {{ ports.update({vhost['listening_port']: 1})-}}
 {% endfor -%}
